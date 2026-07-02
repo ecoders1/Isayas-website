@@ -29,6 +29,8 @@ togglePw.addEventListener('click', () => {
 /* ─── Redirect if already logged in ─── */
 db.auth.getSession().then(({ data }) => {
   if (data.session) window.location.href = 'dashboard.html';
+}).catch(() => {
+  // Supabase not configured yet — silently ignore on login page
 });
 
 /* ─── Login form submit ─── */
@@ -43,19 +45,36 @@ loginForm.addEventListener('submit', async (e) => {
     return;
   }
 
-  setBusy(true);
-  setStatus('', '');
-
-  const { error } = await db.auth.signInWithPassword({ email, password });
-
-  if (error) {
-    setBusy(false);
-    setStatus(error.message || 'Sign-in failed. Please try again.', 'error');
+  // Guard: keys not configured
+  const url = window.__ENV?.SUPABASE_URL || '';
+  if (!url || url.includes('your-project-id')) {
+    setStatus('⚠ Supabase is not configured. Add your URL and anon key to js/env-config.js', 'error');
     return;
   }
 
-  setStatus('✓ Signed in! Redirecting…', 'success');
-  setTimeout(() => { window.location.href = 'dashboard.html'; }, 600);
+  setBusy(true);
+  setStatus('', '');
+
+  try {
+    const { error } = await db.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      setBusy(false);
+      setStatus(error.message || 'Sign-in failed. Please try again.', 'error');
+      return;
+    }
+
+    setStatus('✓ Signed in! Redirecting…', 'success');
+    setTimeout(() => { window.location.href = 'dashboard.html'; }, 600);
+
+  } catch (err) {
+    setBusy(false);
+    if (err.message === 'Failed to fetch') {
+      setStatus('Cannot reach Supabase. Check your URL and anon key in js/env-config.js', 'error');
+    } else {
+      setStatus(err.message || 'Unexpected error. Please try again.', 'error');
+    }
+  }
 });
 
 function setBusy(busy) {
