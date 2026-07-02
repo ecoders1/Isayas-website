@@ -68,18 +68,18 @@ create policy "Anyone can submit a message"
 create policy "Admin can read messages"
   on public.contact_messages for select
   to authenticated
-  using (auth.role() = 'authenticated');
+  using (auth.uid() is not null);
 
 create policy "Admin can delete messages"
   on public.contact_messages for delete
   to authenticated
-  using (auth.role() = 'authenticated');
+  using (auth.uid() is not null);
 
 create policy "Admin can mark messages read"
   on public.contact_messages for update
   to authenticated
-  using (auth.role() = 'authenticated')
-  with check (auth.role() = 'authenticated');
+  using (auth.uid() is not null)
+  with check (auth.uid() is not null);
 
 -- projects: public can SELECT featured; only authed admin can INSERT/UPDATE/DELETE
 alter table public.projects enable row level security;
@@ -95,8 +95,8 @@ create policy "Anyone can view featured projects"
 create policy "Admin can manage projects"
   on public.projects for all
   to authenticated
-  using (auth.role() = 'authenticated')
-  with check (auth.role() = 'authenticated');
+  using (auth.uid() is not null)
+  with check (auth.uid() is not null);
 
 -- ─── STORAGE BUCKET: project-images ─────────────────────
 -- Run this AFTER enabling Storage in your Supabase project.
