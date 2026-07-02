@@ -1,7 +1,21 @@
 /* ============================================
-   skills.js – Skill card click → lecture modal
+   skills.js – Skill card → video intro → modal
    ============================================ */
 'use strict';
+
+/* ─── Short intro video IDs (~56 sec each) ─── */
+const SKILL_VIDEOS = {
+  HTML:           'salY_Sm6mv4',   // HTML in 100 seconds – Fireship
+  CSS:            'OEV8gMkCHXQ',   // CSS in 100 seconds – Fireship
+  JavaScript:     'DHjqpvDnNGE',   // JS in 100 seconds – Fireship
+  PHP:            'a7_WFUlFS94',   // PHP in 100 seconds – Fireship
+  MySQL:          'Cz3WcZLRaWc',   // SQL in 100 seconds – Fireship
+  Flutter:        '1gDhl4leEzA',   // Flutter in 100 seconds – Fireship
+  Firebase:       'vAoB4VbhRzM',   // Firebase in 100 seconds – Fireship
+  Supabase:       'zBZgdTb-dns',   // Supabase in 100 seconds – Fireship
+  'Git & GitHub': 'hwP7WHIs870',   // Git in 100 seconds – Fireship
+  Vercel:         'sPmat30SE4k',   // Vercel in 100 seconds – Fireship
+};
 
 const SKILLS = {
   HTML: {
@@ -236,7 +250,84 @@ const SKILLS = {
   },
 };
 
-/* ─── Modal logic ─── */
+/* ══════════════════════════════════════════
+   VIDEO PLAYER MODAL
+   ══════════════════════════════════════════ */
+function openVideoModal(skillName) {
+  const videoId = SKILL_VIDEOS[skillName];
+  if (!videoId) { openModal(skillName); return; }
+
+  const existing = document.getElementById('skillVideoModal');
+  if (existing) existing.remove();
+
+  const vm = document.createElement('div');
+  vm.id = 'skillVideoModal';
+  vm.className = 'skill-video-overlay';
+  vm.setAttribute('role', 'dialog');
+  vm.setAttribute('aria-modal', 'true');
+  vm.setAttribute('aria-label', `${skillName} intro video`);
+
+  vm.innerHTML = `
+    <div class="skill-video-card">
+      <div class="skill-video-header">
+        <div class="skill-video-title-row">
+          <span class="skill-video-badge">
+            <i class="fab fa-youtube"></i> ~56 sec intro
+          </span>
+          <h3>${skillName}</h3>
+        </div>
+        <button class="skill-video-close" id="closeVideoModal" aria-label="Close video">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="skill-video-wrap">
+        <iframe
+          id="ytPlayer"
+          src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&end=60"
+          title="${skillName} in 100 seconds"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+
+      <div class="skill-video-footer">
+        <button class="btn btn-outline btn-sm" id="skipVideoBtn">
+          <i class="fas fa-forward"></i> Skip Video
+        </button>
+        <button class="btn btn-primary btn-sm" id="continueToModal">
+          <i class="fas fa-book-open"></i> View Full Lectures
+        </button>
+      </div>
+    </div>`;
+
+  document.body.appendChild(vm);
+  document.body.style.overflow = 'hidden';
+
+  const close = () => {
+    // Stop iframe (prevent audio continuing)
+    const iframe = document.getElementById('ytPlayer');
+    if (iframe) iframe.src = '';
+    vm.remove();
+    document.body.style.overflow = '';
+  };
+
+  const goToLectures = () => { close(); openModal(skillName); };
+
+  document.getElementById('closeVideoModal').addEventListener('click', close);
+  document.getElementById('skipVideoBtn').addEventListener('click', goToLectures);
+  document.getElementById('continueToModal').addEventListener('click', goToLectures);
+  vm.addEventListener('click', (e) => { if (e.target === vm) close(); });
+  document.addEventListener('keydown', function escVid(e) {
+    if (e.key === 'Escape') { close(); document.removeEventListener('keydown', escVid); }
+  });
+}
+
+/* ══════════════════════════════════════════
+   LECTURE MODAL
+   ══════════════════════════════════════════ */
 const overlay    = document.getElementById('skillModal');
 const modalIcon  = document.getElementById('skillModalIcon');
 const modalTitle = document.getElementById('skillModalTitle');
@@ -247,22 +338,17 @@ const closeBtn2  = document.getElementById('skillModalClose2');
 const tabBtns    = document.querySelectorAll('.smt');
 
 let currentSkill = null;
-let currentTab   = 'overview';
 
-/* Attach click to each skill card */
+/* Attach click to each skill card → open video first */
 document.querySelectorAll('.skill-card').forEach((card) => {
-  card.addEventListener('click', () => {
-    const name = card.querySelector('.skill-card-name').textContent.trim();
-    openModal(name);
-  });
+  const name = card.querySelector('.skill-card-name').textContent.trim();
   card.setAttribute('tabindex', '0');
   card.setAttribute('role', 'button');
-  card.setAttribute('aria-label', `View ${card.querySelector('.skill-card-name').textContent.trim()} lectures`);
+  card.setAttribute('aria-label', `Watch ${name} intro video`);
+
+  card.addEventListener('click', () => openVideoModal(name));
   card.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      card.click();
-    }
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVideoModal(name); }
   });
 });
 
@@ -271,11 +357,10 @@ function openModal(skillName) {
   if (!skill) return;
   currentSkill = skill;
 
-  modalIcon.innerHTML  = skill.icon;
+  modalIcon.innerHTML    = skill.icon;
   modalTitle.textContent = skillName;
   modalLevel.textContent = skill.level;
 
-  // Reset to overview tab
   setTab('overview');
   tabBtns.forEach((b) => b.classList.toggle('active', b.dataset.tab === 'overview'));
 
@@ -292,9 +377,8 @@ function closeModal() {
 closeBtn.addEventListener('click', closeModal);
 closeBtn2.addEventListener('click', closeModal);
 overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !overlay.hidden) closeModal(); });
 
-/* Tabs */
 tabBtns.forEach((btn) => {
   btn.addEventListener('click', () => {
     tabBtns.forEach((b) => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
@@ -305,7 +389,6 @@ tabBtns.forEach((btn) => {
 });
 
 function setTab(tab) {
-  currentTab = tab;
   if (!currentSkill) return;
 
   if (tab === 'overview') {

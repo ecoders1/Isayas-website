@@ -1292,3 +1292,109 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .skill-modal-footer { padding: 0.75rem 1.1rem; }
   .skill-modal-title { font-size: 1.05rem; }
 }
+
+/* ===================================
+   SKILL VIDEO MODAL
+   =================================== */
+.skill-video-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease;
+}
+
+.skill-video-card {
+  width: 100%;
+  max-width: 760px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+  animation: slideUp 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+.skill-video-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.skill-video-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.skill-video-title-row h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.skill-video-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255,0,0,0.1);
+  color: #ff4444;
+  border: 1px solid rgba(255,0,0,0.25);
+  border-radius: 50px;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.skill-video-badge i { font-size: 0.85rem; }
+
+.skill-video-close {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all var(--transition);
+  font-size: 0.9rem;
+}
+.skill-video-close:hover { color: #ef4444; border-color: #ef4444; }
+
+/* 16:9 responsive iframe */
+.skill-video-wrap {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  background: #000;
+}
+.skill-video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.skill-video-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 0.9rem 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 600px) {
+  .skill-video-title-row { flex-direction: column; align-items: flex-start; gap: 0.35rem; }
+  .skill-video-footer { flex-direction: column; }
+  .skill-video-footer .btn { width: 100%; justify-content: center; }
+}
