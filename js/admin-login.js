@@ -28,7 +28,7 @@ togglePw.addEventListener('click', () => {
 
 /* ─── Redirect if already logged in ─── */
 db.auth.getSession().then(({ data }) => {
-  if (data.session) window.location.href = 'dashboard.html';
+  if (data.session) window.location.href = '/admin/dashboard.html';
 }).catch(() => {
   // Supabase not configured yet — silently ignore on login page
 });
@@ -64,7 +64,7 @@ loginForm.addEventListener('submit', async (e) => {
     }
 
     setStatus('✓ Signed in! Redirecting…', 'success');
-    setTimeout(() => { window.location.href = 'dashboard.html'; }, 600);
+    setTimeout(() => { window.location.href = '/admin/dashboard.html'; }, 600);
 
   } catch (err) {
     setBusy(false);

@@ -7,7 +7,7 @@ import { db, SUPABASE_URL } from './supabase.js';
 
 /* ─── Auth guard: redirect to login if no session ─── */
 const { data: { session } } = await db.auth.getSession();
-if (!session) { window.location.href = 'index.html'; }
+if (!session) { window.location.href = '/admin/index.html'; }
 
 const userEmailEl = document.getElementById('dashUserEmail');
 if (userEmailEl) userEmailEl.textContent = session.user.email;
@@ -52,7 +52,7 @@ sidebarLinks.forEach((btn) => {
 /* ─── Sign Out ─── */
 document.getElementById('logoutBtn').addEventListener('click', async () => {
   await db.auth.signOut();
-  window.location.href = 'index.html';
+  window.location.href = '/admin/index.html';
 });
 
 /* ══════════════════════════════════════════
