@@ -292,6 +292,8 @@
 .td-name  { font-weight: 600; white-space: nowrap; }
 .td-email { color: var(--primary); }
 .td-msg   { max-width: 260px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.td-msg-click { cursor: pointer; }
+.td-msg-click:hover { color: var(--primary); text-decoration: underline; }
 .td-date  { white-space: nowrap; color: var(--text-muted); font-size: 0.8rem; }
 .td-actions { display: flex; gap: 0.4rem; white-space: nowrap; }
 

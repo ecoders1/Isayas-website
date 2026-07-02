@@ -155,13 +155,13 @@ function setStatus(msg, type) {
   formStatus.className = `form-status ${type}`;
 }
 
-// Lazy-load Supabase client only when the form is submitted
+// Contact form uses the hardcoded Supabase client directly
 async function getSupabaseClient() {
   const { createClient } = window.supabase;
-  const url  = window.__ENV?.SUPABASE_URL      || '';
-  const anon = window.__ENV?.SUPABASE_ANON_KEY || '';
-  if (!url || url.includes('your-project')) return null;
-  return createClient(url, anon);
+  return createClient(
+    'https://tdnyfsuesbmgisfdzryz.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRkbnlmc3Vlc2JtZ2lzZmR6cnl6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI5NDkwNTIsImV4cCI6MjA5ODUyNTA1Mn0.GCr-ma4W4uzCVbLMhY35DHU-jCiK53sCKR8J0xlWL6I'
+  );
 }
 
 contactForm.addEventListener('submit', async (e) => {
@@ -201,7 +201,6 @@ contactForm.addEventListener('submit', async (e) => {
 
       if (error) throw new Error(error.message);
     } else {
-      // Supabase not configured yet — simulate for dev
       await new Promise((r) => setTimeout(r, 1000));
     }
 

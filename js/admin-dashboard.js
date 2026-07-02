@@ -3,7 +3,7 @@
    ============================================ */
 'use strict';
 
-import { db, SUPABASE_URL } from './supabase.js';
+import { db } from './supabase.js';
 
 /* ─── Auth guard: redirect to login if no session ─── */
 const { data: { session } } = await db.auth.getSession();
@@ -58,6 +58,10 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
 /* ══════════════════════════════════════════
    MESSAGES TAB
    ══════════════════════════════════════════ */
+
+// Single delegated listener on tbody — registered ONCE
+document.getElementById('messagesBody').addEventListener('click', handleMessageAction);
+
 async function loadMessages() {
   const tbody = document.getElementById('messagesBody');
   tbody.innerHTML = `<tr><td colspan="6" class="table-loading"><i class="fas fa-circle-notch fa-spin"></i> Loading…</td></tr>`;
@@ -87,7 +91,9 @@ async function loadMessages() {
     <tr class="${m.is_read ? '' : 'row-unread'}" data-id="${m.id}">
       <td class="td-name">${escHtml(m.name)}</td>
       <td><a href="mailto:${escHtml(m.email)}" class="td-email">${escHtml(m.email)}</a></td>
-      <td class="td-msg">${escHtml(m.message)}</td>
+      <td class="td-msg td-msg-click" data-full="${escHtml(m.message)}" title="Click to read full message">
+        ${escHtml(m.message.length > 60 ? m.message.slice(0, 60) + '…' : m.message)}
+      </td>
       <td class="td-date">${formatDate(m.created_at)}</td>
       <td>
         <span class="status-pill ${m.is_read ? 'pill-read' : 'pill-unread'}">
@@ -97,17 +103,26 @@ async function loadMessages() {
       <td class="td-actions">
         ${!m.is_read ? `<button class="action-btn" data-action="read" data-id="${m.id}" title="Mark as read">
           <i class="fas fa-check"></i></button>` : ''}
+        <button class="action-btn" data-action="reply" data-email="${escHtml(m.email)}" data-name="${escHtml(m.name)}" title="Reply">
+          <i class="fas fa-reply"></i>
+        </button>
         <button class="action-btn action-delete" data-action="delete" data-id="${m.id}" title="Delete">
           <i class="fas fa-trash"></i>
         </button>
       </td>
     </tr>`).join('');
-
-  // Delegate events
-  document.getElementById('messagesBody').addEventListener('click', handleMessageAction);
 }
 
 async function handleMessageAction(e) {
+  // Click on message text → open full message modal
+  if (e.target.closest('.td-msg-click')) {
+    const cell = e.target.closest('.td-msg-click');
+    const row  = cell.closest('tr');
+    const id   = row?.dataset.id;
+    openMessageModal(cell.dataset.full, id);
+    return;
+  }
+
   const btn = e.target.closest('[data-action]');
   if (!btn) return;
   const { action, id } = btn.dataset;
@@ -122,6 +137,48 @@ async function handleMessageAction(e) {
   if (action === 'read') {
     const { error } = await db.from('contact_messages').update({ is_read: true }).eq('id', id);
     if (!error) loadMessages();
+  }
+
+  if (action === 'reply') {
+    window.open(`mailto:${btn.dataset.email}?subject=Re: Your message&body=Hi ${btn.dataset.name},%0A%0A`, '_blank');
+  }
+}
+
+/* ── Full message modal ── */
+function openMessageModal(text, id) {
+  const existing = document.getElementById('msgReadModal');
+  if (existing) existing.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'msgReadModal';
+  modal.className = 'modal-overlay';
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
+  modal.innerHTML = `
+    <div class="modal-card glass-card" style="max-width:520px">
+      <div class="modal-header">
+        <h3><i class="fas fa-envelope-open" style="color:var(--primary);margin-right:.5rem"></i>Full Message</h3>
+        <button class="modal-close" id="closeMsgModal" aria-label="Close"><i class="fas fa-times"></i></button>
+      </div>
+      <div style="padding:1.25rem 1.5rem;white-space:pre-wrap;font-size:.92rem;color:var(--text);line-height:1.75;max-height:60vh;overflow-y:auto">${escHtml(text)}</div>
+      <div class="modal-actions">
+        <button class="btn btn-primary btn-sm" id="closeMsgModal2">
+          <i class="fas fa-check"></i> Done
+        </button>
+      </div>
+    </div>`;
+
+  document.body.appendChild(modal);
+  document.body.style.overflow = 'hidden';
+
+  const close = () => { modal.remove(); document.body.style.overflow = ''; };
+  modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+  document.getElementById('closeMsgModal').addEventListener('click', close);
+  document.getElementById('closeMsgModal2').addEventListener('click', close);
+
+  // Auto mark as read when opened
+  if (id) {
+    db.from('contact_messages').update({ is_read: true }).eq('id', id).then(() => loadMessages());
   }
 }
 
