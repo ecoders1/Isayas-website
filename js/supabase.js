@@ -1,19 +1,11 @@
 /* ============================================
    SUPABASE CLIENT – supabase.js
-   Reads config injected by env-config.js at
-   runtime (or falls back to window globals).
    ============================================ */
 'use strict';
 
-// ---------------------------------------------------------------------------
-// Replace the two constants below with your actual Supabase project values,
-// OR keep them as-is and supply them via env-config.js (see instructions).
-// ---------------------------------------------------------------------------
-const SUPABASE_URL  = window.__ENV?.SUPABASE_URL  || 'https://your-project-id.supabase.co';
-const SUPABASE_ANON = window.__ENV?.SUPABASE_ANON_KEY || 'your-supabase-anon-key';
+const SUPABASE_URL  = 'https://tdnyfsuesbmgisfdzryz.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRkbnlmc3Vlc2JtZ2lzZmR6cnl6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI5NDkwNTIsImV4cCI6MjA5ODUyNTA1Mn0.GCr-ma4W4uzCVbLMhY35DHU-jCiK53sCKR8J0xlWL6I';
 
-// Load Supabase JS v2 from CDN (injected in HTML head)
-// https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2
 const { createClient } = window.supabase;
 
 const db = createClient(SUPABASE_URL, SUPABASE_ANON, {

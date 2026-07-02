@@ -3,7 +3,7 @@
    ============================================ */
 'use strict';
 
-import { db } from './supabase.js';
+import { db, SUPABASE_URL } from './supabase.js';
 
 const html        = document.documentElement;
 const loginForm   = document.getElementById('loginForm');
@@ -46,9 +46,8 @@ loginForm.addEventListener('submit', async (e) => {
   }
 
   // Guard: keys not configured
-  const url = window.__ENV?.SUPABASE_URL || '';
-  if (!url || url.includes('your-project-id')) {
-    setStatus('⚠ Supabase is not configured. Add your URL and anon key to js/env-config.js', 'error');
+  if (SUPABASE_URL.includes('your-project-id')) {
+    setStatus('⚠ Supabase is not configured. Add your URL and anon key to js/supabase.js', 'error');
     return;
   }
 
