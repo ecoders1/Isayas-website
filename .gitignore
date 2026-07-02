@@ -1,0 +1,22 @@
+# Environment variables – NEVER commit these
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/settings.json
+*.code-workspace
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependencies (if you add a build step later)
+node_modules/

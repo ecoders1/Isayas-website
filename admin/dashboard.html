@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Dashboard – Isayas Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/admin.css" />
+</head>
+<body class="admin-body">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-dot">I</span>sayas
+      <span class="sidebar-label">Admin</span>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="sidebar-link active" data-tab="messages">
+        <i class="fas fa-envelope"></i> Messages
+        <span class="badge-count" id="unreadCount"></span>
+      </button>
+      <button class="sidebar-link" data-tab="projects">
+        <i class="fas fa-folder-open"></i> Projects
+      </button>
+      <button class="sidebar-link" data-tab="upload">
+        <i class="fas fa-cloud-upload-alt"></i> Upload Image
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="theme-toggle" id="dashThemeToggle" aria-label="Toggle theme">
+        <i class="fas fa-moon" id="dashThemeIcon"></i>
+      </button>
+      <button class="btn-logout" id="logoutBtn" aria-label="Sign out">
+        <i class="fas fa-sign-out-alt"></i> Sign Out
+      </button>
+    </div>
+  </aside>
+
+  <!-- ── MAIN CONTENT ── -->
+  <div class="dash-main">
+
+    <!-- Top bar -->
+    <header class="dash-topbar">
+      <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+        <i class="fas fa-bars"></i>
+      </button>
+      <h2 class="dash-page-title" id="dashPageTitle">Messages</h2>
+      <div class="dash-user" id="dashUser">
+        <i class="fas fa-user-circle"></i>
+        <span id="dashUserEmail"></span>
+      </div>
+    </header>
+
+    <!-- ── TAB: MESSAGES ── -->
+    <section class="dash-tab active" id="tab-messages">
+      <div class="dash-tab-header">
+        <h3>Contact Messages</h3>
+        <button class="btn btn-outline btn-sm" id="refreshMessages">
+          <i class="fas fa-sync-alt"></i> Refresh
+        </button>
+      </div>
+      <div class="dash-stats" id="msgStats">
+        <div class="stat-card">
+          <i class="fas fa-envelope"></i>
+          <div><span id="totalMessages">–</span><small>Total</small></div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-envelope-open"></i>
+          <div><span id="unreadMessages">–</span><small>Unread</small></div>
+        </div>
+      </div>
+      <div class="table-wrap glass-card">
+        <table class="dash-table" id="messagesTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Message</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="messagesBody">
+            <tr><td colspan="6" class="table-loading"><i class="fas fa-circle-notch fa-spin"></i> Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── TAB: PROJECTS ── -->
+    <section class="dash-tab" id="tab-projects">
+      <div class="dash-tab-header">
+        <h3>Projects</h3>
+        <button class="btn btn-primary btn-sm" id="openAddProject">
+          <i class="fas fa-plus"></i> Add Project
+        </button>
+      </div>
+      <div class="projects-admin-grid" id="projectsGrid">
+        <div class="table-loading"><i class="fas fa-circle-notch fa-spin"></i> Loading…</div>
+      </div>
+    </section>
+
+    <!-- ── TAB: UPLOAD ── -->
+    <section class="dash-tab" id="tab-upload">
+      <div class="dash-tab-header">
+        <h3>Upload Project Image</h3>
+      </div>
+      <div class="upload-area glass-card" id="uploadArea">
+        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+        <p>Drag &amp; drop an image here, or</p>
+        <label class="btn btn-primary" for="imageFile">
+          <i class="fas fa-folder-open"></i> Choose File
+        </label>
+        <input type="file" id="imageFile" accept="image/jpeg,image/png,image/webp" hidden />
+        <p class="upload-hint">JPG, PNG, WebP · max 5 MB</p>
+        <div id="uploadPreview" class="upload-preview hidden"></div>
+        <div id="uploadStatus" class="form-status" role="alert" aria-live="polite"></div>
+        <button class="btn btn-primary" id="doUpload" disabled>
+          <i class="fas fa-upload"></i> <span>Upload to Supabase Storage</span>
+        </button>
+        <div id="uploadResult" class="upload-result hidden">
+          <label>Public URL:</label>
+          <div class="url-copy-row">
+            <input type="text" id="uploadedUrl" class="form-input" readonly />
+            <button class="btn btn-outline btn-sm" id="copyUrl">
+              <i class="fas fa-copy"></i> Copy
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /.dash-main -->
+
+  <!-- ── PROJECT MODAL ── -->
+  <div class="modal-overlay" id="projectModal" role="dialog" aria-modal="true" aria-label="Project editor" hidden>
+    <div class="modal-card glass-card">
+      <div class="modal-header">
+        <h3 id="modalTitle">Add Project</h3>
+        <button class="modal-close" id="closeModal" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <form id="projectForm" novalidate>
+        <input type="hidden" id="projectId" />
+        <div class="modal-grid">
+          <div class="form-group">
+            <label class="form-label" for="pTitle">Title *</label>
+            <input type="text" id="pTitle" class="form-input" required maxlength="120" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="pTags">Tags (comma-separated)</label>
+            <input type="text" id="pTags" class="form-input" placeholder="HTML, CSS, JavaScript" />
+          </div>
+          <div class="form-group modal-full">
+            <label class="form-label" for="pDesc">Description *</label>
+            <textarea id="pDesc" class="form-input form-textarea" rows="3" required maxlength="500"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="pLive">Live URL</label>
+            <input type="url" id="pLive" class="form-input" placeholder="https://..." />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="pGithub">GitHub URL</label>
+            <input type="url" id="pGithub" class="form-input" placeholder="https://github.com/..." />
+          </div>
+          <div class="form-group modal-full">
+            <label class="form-label" for="pImage">Image URL</label>
+            <input type="text" id="pImage" class="form-input" placeholder="Paste a URL or upload via Upload tab" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="pOrder">Sort Order</label>
+            <input type="number" id="pOrder" class="form-input" value="0" min="0" />
+          </div>
+          <div class="form-group" style="display:flex;align-items:center;gap:.6rem;padding-top:1.6rem">
+            <input type="checkbox" id="pFeatured" style="width:18px;height:18px;accent-color:var(--primary)" checked />
+            <label for="pFeatured" class="form-label" style="margin:0">Featured on portfolio</label>
+          </div>
+        </div>
+        <div class="form-status" id="projectFormStatus" role="alert" aria-live="polite"></div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline" id="cancelModal">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="saveProjectBtn">
+            <i class="fas fa-save"></i> <span>Save Project</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/env-config.js"></script>
+  <script type="module" src="../js/admin-dashboard.js"></script>
+</body>
+</html>

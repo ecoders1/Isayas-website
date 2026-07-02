@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Isayas – Full Stack Web Developer. Building modern, responsive, and high-performance websites." />
+  <meta name="keywords" content="Isayas, Full Stack Developer, Web Developer, Portfolio, HTML, CSS, JavaScript, PHP, Flutter" />
+  <meta name="author" content="Isayas" />
+  <meta property="og:title" content="Isayas – Full Stack Web Developer" />
+  <meta property="og:description" content="Building modern, responsive, and high-performance websites." />
+  <meta property="og:type" content="website" />
+  <title>Isayas – Full Stack Web Developer</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar" id="navbar" role="banner">
+    <div class="container nav-container">
+      <a href="#home" class="nav-logo" aria-label="Isayas Home">
+        <span class="logo-dot">I</span>sayas
+      </a>
+      <nav role="navigation" aria-label="Main navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <ul>
+      <li><a href="#home" class="mobile-link">Home</a></li>
+      <li><a href="#about" class="mobile-link">About</a></li>
+      <li><a href="#projects" class="mobile-link">Projects</a></li>
+      <li><a href="#contact" class="mobile-link">Contact</a></li>
+    </ul>
+  </div>
+
+  <main>
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home" aria-label="Hero section">
+      <div class="hero-bg-blobs" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+      </div>
+      <div class="container hero-container">
+        <div class="hero-content animate-fadeInUp">
+          <div class="hero-badge">
+            <span class="badge-dot"></span> Available for hire
+          </div>
+          <h1 class="hero-title">
+            Hi, I'm <span class="gradient-text">Isayas</span>
+          </h1>
+          <h2 class="hero-subtitle">Full Stack Web Developer</h2>
+          <p class="hero-desc">
+            I build modern, responsive, and high-performance websites.
+          </p>
+          <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary">
+              <i class="fas fa-folder-open"></i> View Projects
+            </a>
+            <a href="#contact" class="btn btn-outline">
+              <i class="fas fa-envelope"></i> Contact Me
+            </a>
+          </div>
+          <div class="hero-socials">
+            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://t.me/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Telegram">
+              <i class="fab fa-telegram-plane"></i>
+            </a>
+            <a href="mailto:isayas@example.com" class="social-icon" aria-label="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+        </div>
+        <div class="hero-image animate-zoomIn">
+          <div class="image-wrapper">
+            <div class="image-ring ring-1" aria-hidden="true"></div>
+            <div class="image-ring ring-2" aria-hidden="true"></div>
+            <img
+              src="assets/profile.jpg"
+              alt="Isayas – Full Stack Web Developer"
+              class="profile-photo"
+              loading="eager"
+              onerror="this.src='https://ui-avatars.com/api/?name=Isayas&size=400&background=2563EB&color=fff&bold=true&font-size=0.4'"
+            />
+          </div>
+        </div>
+      </div>
+      <a href="#about" class="scroll-down" aria-label="Scroll to About">
+        <i class="fas fa-chevron-down"></i>
+      </a>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="about section" id="about" aria-label="About section">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <span class="section-tag">Get to know me</span>
+          <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-text animate-on-scroll">
+            <p>
+              I am a passionate web developer who creates fast, responsive, and modern
+              websites using the latest web technologies. I enjoy solving problems and
+              building clean digital experiences.
+            </p>
+            <p>
+              With a strong focus on performance and clean code, I strive to deliver
+              solutions that are both functional and visually polished. Whether it's
+              a simple landing page or a complex full-stack application, I bring the
+              same level of care and precision to every project.
+            </p>
+            <a href="#contact" class="btn btn-primary" style="margin-top:1.5rem;">
+              <i class="fas fa-paper-plane"></i> Let's Work Together
+            </a>
+          </div>
+          <div class="skills-grid animate-on-scroll">
+            <h3 class="skills-title">Skills</h3>
+            <div class="skills-list">
+              <div class="skill-item" data-skill="HTML" data-level="95">
+                <div class="skill-header">
+                  <span class="skill-icon"><i class="fab fa-html5"></i></span>
+                  <span class="skill-name">HTML</span>
+                  <span class="skill-percent">95%</span>
+                </div>
+                <div class="skill-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+                  <div class="skill-fill" style="--target: 95%"></div>
+                </div>
+              </div>
+              <div class="skill-item" data-skill="CSS" data-level="90">
+                <div class="skill-header">
+                  <span class="skill-icon"><i class="fab fa-css3-alt"></i></span>
+                  <span class="skill-name">CSS</span>
+                  <span class="skill-percent">90%</span>
+                </div>
+                <div class="skill-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                  <div class="skill-fill" style="--target: 90%"></div>
+                </div>
+              </div>
+              <div class="skill-item" data-skill="JavaScript" data-level="85">
+                <div class="skill-header">
+                  <span class="skill-icon"><i class="fab fa-js-square"></i></span>
+                  <span class="skill-name">JavaScript</span>
+                  <span class="skill-percent">85%</span>
+                </div>
+                <div class="skill-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                  <div class="skill-fill" style="--target: 85%"></div>
+                </div>
+              </div>
+              <div class="skill-item" data-skill="PHP" data-level="80">
+                <div class="skill-header">
+                  <span class="skill-icon"><i class="fab fa-php"></i></span>
+                  <span class="skill-name">PHP</span>
+                  <span class="skill-percent">80%</span>
+                </div>
+                <div class="skill-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                  <div class="skill-fill" style="--target: 80%"></div>
+                </div>
+              </div>
+              <div class="skill-item" data-skill="MySQL" data-level="78">
+                <div class="skill-header">
+                  <span class="skill-icon"><i class="fas fa-database"></i></span>
+                  <span class="skill-name">MySQL</span>
+                  <span class="skill-percent">78%</span>
+                </div>
+                <div class="skill-bar" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100">
+                  <div class="skill-fill" style="--target: 78%"></div>
+                </div>
+              </div>
+              <div class="skill-item" data-skill="Flutter" data-level="75">
+                <div class="skill-header">
+                  <span class="skill-icon"><i class="fas fa-mobile-alt"></i></span>
+                  <span class="skill-name">Flutter</span>
+                  <span class="skill-percent">75%</span>
+                </div>
+                <div class="skill-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                  <div class="skill-fill" style="--target: 75%"></div>
+                </div>
+              </div>
+              <div class="skill-item" data-skill="Firebase" data-level="80">
+                <div class="skill-header">
+                  <span class="skill-icon"><i class="fas fa-fire"></i></span>
+                  <span class="skill-name">Firebase</span>
+                  <span class="skill-percent">80%</span>
+                </div>
+                <div class="skill-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                  <div class="skill-fill" style="--target: 80%"></div>
+                </div>
+              </div>
+              <div class="skill-item" data-skill="Supabase" data-level="75">
+                <div class="skill-header">
+                  <span class="skill-icon"><i class="fas fa-server"></i></span>
+                  <span class="skill-name">Supabase</span>
+                  <span class="skill-percent">75%</span>
+                </div>
+                <div class="skill-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                  <div class="skill-fill" style="--target: 75%"></div>
+                </div>
+              </div>
+              <div class="skill-item" data-skill="Git" data-level="88">
+                <div class="skill-header">
+                  <span class="skill-icon"><i class="fab fa-git-alt"></i></span>
+                  <span class="skill-name">Git & GitHub</span>
+                  <span class="skill-percent">88%</span>
+                </div>
+                <div class="skill-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+                  <div class="skill-fill" style="--target: 88%"></div>
+                </div>
+              </div>
+              <div class="skill-item" data-skill="Vercel" data-level="82">
+                <div class="skill-header">
+                  <span class="skill-icon"><i class="fas fa-rocket"></i></span>
+                  <span class="skill-name">Vercel</span>
+                  <span class="skill-percent">82%</span>
+                </div>
+                <div class="skill-bar" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100">
+                  <div class="skill-fill" style="--target: 82%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section class="projects section" id="projects" aria-label="Projects section">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <span class="section-tag">What I've built</span>
+          <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+        </div>
+        <div class="projects-grid">
+
+          <!-- Project 1 -->
+          <article class="project-card animate-on-scroll" tabindex="0">
+            <div class="project-image">
+              <img
+                src="assets/project1.jpg"
+                alt="E-Commerce Platform screenshot"
+                loading="lazy"
+                onerror="this.parentElement.classList.add('no-img')"
+              />
+              <div class="project-overlay" aria-hidden="true">
+                <i class="fas fa-eye"></i>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">E-Commerce Platform</h3>
+              <p class="project-desc">
+                A fully functional online store with cart, authentication, and payment integration built for seamless shopping experiences.
+              </p>
+              <div class="project-tags">
+                <span class="tag">PHP</span>
+                <span class="tag">MySQL</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">CSS</span>
+              </div>
+              <div class="project-links">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                  <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+                  <i class="fab fa-github"></i> GitHub
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card animate-on-scroll" tabindex="0">
+            <div class="project-image">
+              <img
+                src="assets/project2.jpg"
+                alt="Task Management App screenshot"
+                loading="lazy"
+                onerror="this.parentElement.classList.add('no-img')"
+              />
+              <div class="project-overlay" aria-hidden="true">
+                <i class="fas fa-eye"></i>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Task Management App</h3>
+              <p class="project-desc">
+                A real-time collaborative task manager with drag-and-drop, notifications, and team workspace features powered by Firebase.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Flutter</span>
+                <span class="tag">Firebase</span>
+                <span class="tag">Dart</span>
+              </div>
+              <div class="project-links">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                  <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+                  <i class="fab fa-github"></i> GitHub
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card animate-on-scroll" tabindex="0">
+            <div class="project-image">
+              <img
+                src="assets/project3.jpg"
+                alt="Developer Portfolio screenshot"
+                loading="lazy"
+                onerror="this.parentElement.classList.add('no-img')"
+              />
+              <div class="project-overlay" aria-hidden="true">
+                <i class="fas fa-eye"></i>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Developer Portfolio</h3>
+              <p class="project-desc">
+                A lightning-fast personal portfolio with dark mode, smooth animations, and a contact form — built with pure HTML, CSS, and JavaScript.
+              </p>
+              <div class="project-tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+              </div>
+              <div class="project-links">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                  <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+                  <i class="fab fa-github"></i> GitHub
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="contact section" id="contact" aria-label="Contact section">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <span class="section-tag">Get in touch</span>
+          <h2 class="section-title">Contact <span class="gradient-text">Me</span></h2>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info animate-on-scroll">
+            <p class="contact-intro">
+              Have a project in mind or just want to say hello? My inbox is always open.
+            </p>
+            <div class="contact-links">
+              <a href="mailto:isayas@example.com" class="contact-link" aria-label="Send email">
+                <div class="contact-icon-wrap">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div>
+                  <span class="contact-link-label">Email</span>
+                  <span class="contact-link-value">isayas@example.com</span>
+                </div>
+              </a>
+              <a href="https://t.me/" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="Telegram">
+                <div class="contact-icon-wrap">
+                  <i class="fab fa-telegram-plane"></i>
+                </div>
+                <div>
+                  <span class="contact-link-label">Telegram</span>
+                  <span class="contact-link-value">@isayas</span>
+                </div>
+              </a>
+              <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="GitHub">
+                <div class="contact-icon-wrap">
+                  <i class="fab fa-github"></i>
+                </div>
+                <div>
+                  <span class="contact-link-label">GitHub</span>
+                  <span class="contact-link-value">github.com/isayas</span>
+                </div>
+              </a>
+            </div>
+          </div>
+          <form class="contact-form glass-card animate-on-scroll" id="contactForm" novalidate aria-label="Contact form">
+            <div class="form-group">
+              <label for="name" class="form-label">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-input"
+                placeholder="Your name"
+                required
+                autocomplete="name"
+                aria-required="true"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-input"
+                placeholder="your@email.com"
+                required
+                autocomplete="email"
+                aria-required="true"
+              />
+            </div>
+            <div class="form-group">
+              <label for="message" class="form-label">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                class="form-input form-textarea"
+                placeholder="Your message..."
+                rows="5"
+                required
+                aria-required="true"
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+              <i class="fas fa-paper-plane"></i>
+              <span>Send Message</span>
+            </button>
+            <div class="form-status" id="formStatus" role="alert" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" role="contentinfo">
+
+    <!-- Built With Strip -->
+    <div class="built-with-strip">
+      <div class="container">
+        <p class="built-with-label">This website is built &amp; deployed with</p>
+        <div class="built-with-badges">
+
+          <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" class="built-badge" aria-label="Deployed on Vercel">
+            <svg class="badge-logo" viewBox="0 0 76 65" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="currentColor"/>
+            </svg>
+            <span>Vercel</span>
+          </a>
+
+          <a href="https://supabase.com" target="_blank" rel="noopener noreferrer" class="built-badge" aria-label="Powered by Supabase">
+            <svg class="badge-logo" viewBox="0 0 109 113" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M63.708 110.284c-2.86 3.601-8.658 1.628-8.727-2.97l-1.007-67.251h45.22c8.19 0 12.758 9.46 7.665 15.874L63.708 110.284z" fill="url(#supabase-b)"/>
+              <path d="M63.708 110.284c-2.86 3.601-8.658 1.628-8.727-2.97l-1.007-67.251h45.22c8.19 0 12.758 9.46 7.665 15.874L63.708 110.284z" fill="url(#supabase-c)" fill-opacity=".2"/>
+              <path d="M45.317 2.071c2.86-3.601 8.657-1.628 8.726 2.97l.442 67.251H9.935c-8.19 0-12.759-9.46-7.665-15.875L45.317 2.071z" fill="#3ECF8E"/>
+              <defs>
+                <linearGradient id="supabase-b" x1="53.974" y1="54.974" x2="94.163" y2="71.829" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#249361"/>
+                  <stop offset="1" stop-color="#3ECF8E"/>
+                </linearGradient>
+                <linearGradient id="supabase-c" x1="36.156" y1="30.578" x2="54.484" y2="65.35" gradientUnits="userSpaceOnUse">
+                  <stop/>
+                  <stop offset="1" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <span>Supabase</span>
+          </a>
+
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="built-badge" aria-label="Source on GitHub">
+            <svg class="badge-logo" viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" fill="currentColor"/>
+            </svg>
+            <span>GitHub</span>
+          </a>
+
+          <a href="https://kiro.dev" target="_blank" rel="noopener noreferrer" class="built-badge built-badge--kiro" aria-label="Built with Kiro AI">
+            <svg class="badge-logo kiro-logo" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="32" height="32" rx="8" fill="url(#kiro-grad)"/>
+              <path d="M9 8h3v7l6-7h4l-6.5 7.5L22.5 24H18l-6-8v8H9V8z" fill="#fff"/>
+              <defs>
+                <linearGradient id="kiro-grad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#2563EB"/>
+                  <stop offset="1" stop-color="#06B6D4"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <span>Kiro</span>
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-container">
+      <p class="footer-copy">© 2026 Isayas. All Rights Reserved.</p>
+      <div class="footer-socials">
+        <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://t.me/" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+          <i class="fab fa-telegram-plane"></i>
+        </a>
+        <a href="mailto:isayas@example.com" aria-label="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- Supabase (for contact form) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/env-config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
