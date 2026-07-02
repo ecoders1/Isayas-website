@@ -135,10 +135,10 @@ create policy "Admin can delete project images"
 insert into public.projects (title, description, tags, live_url, github_url, sort_order)
 values
   (
-    'E-Commerce Platform',
-    'A fully functional online store with cart, authentication, and payment integration built for seamless shopping experiences.',
-    array['PHP','MySQL','JavaScript','CSS'],
-    '#', '#', 1
+    'Ethio2',
+    'A modern full-stack web application built and deployed on Vercel — delivering a fast, responsive, and seamless user experience.',
+    array['JavaScript','CSS','Vercel','Supabase'],
+    'https://ethio2.vercel.app', 'https://github.com/ecoders1', 1
   ),
   (
     'Task Management App',
