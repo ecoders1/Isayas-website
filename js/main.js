@@ -121,12 +121,12 @@ const scrollObserver = new IntersectionObserver(
 
 animatedEls.forEach((el) => scrollObserver.observe(el));
 
-/* ─── SKILL BARS ─── */
+/* ─── SKILL RINGS (SVG circles) ─── */
 function animateSkills() {
-  const fills = document.querySelectorAll('.skill-fill');
-  fills.forEach((fill) => {
+  const rings = document.querySelectorAll('.ring-fill');
+  rings.forEach((ring) => {
     // Small delay so CSS transition fires after 'visible' class
-    requestAnimationFrame(() => fill.classList.add('animated'));
+    requestAnimationFrame(() => ring.classList.add('animated'));
   });
 }
 

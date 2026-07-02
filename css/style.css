@@ -499,6 +499,97 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-size: 1rem;
 }
 
+/* Skills – modern card grid with SVG rings */
+.skills-cards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+
+.skill-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.1rem 0.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  cursor: default;
+}
+.skill-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary);
+}
+
+/* Ring wrapper */
+.skill-ring-wrap {
+  position: relative;
+  width: 72px; height: 72px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.skill-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  transform: rotate(-90deg);
+}
+
+/* circumference = 2π × 34 ≈ 213.6 */
+.ring-bg {
+  fill: none;
+  stroke: var(--surface);
+  stroke-width: 5;
+}
+.ring-fill {
+  fill: none;
+  stroke: url(#skillGrad);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 213.6;
+  stroke-dashoffset: 213.6;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ring-fill.animated {
+  stroke-dashoffset: calc(213.6 - (213.6 * var(--pct) / 100));
+}
+
+.skill-ring-icon {
+  position: relative;
+  z-index: 1;
+  font-size: 1.5rem;
+  color: var(--primary);
+  transition: transform var(--transition);
+}
+.skill-card:hover .skill-ring-icon { transform: scale(1.15); }
+
+.skill-card-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
+  line-height: 1.2;
+}
+.skill-card-pct {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+@media (max-width: 900px) {
+  .skills-cards { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 600px) {
+  .skills-cards { grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+}
+@media (max-width: 380px) {
+  .skills-cards { grid-template-columns: repeat(2, 1fr); }
+}
+
 /* Skills */
 .skills-title {
   font-size: 1.15rem;
