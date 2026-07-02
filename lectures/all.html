@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="All lecture notes and learning resources by Isayas – Full Stack Web Developer." />
+  <title>All Lectures – Isayas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/lectures.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar scrolled" role="banner">
+    <div class="container nav-container">
+      <a href="../index.html" class="nav-logo"><span class="logo-dot">I</span>sayas</a>
+      <nav role="navigation">
+        <ul class="nav-links">
+          <li><a href="../index.html#home"     class="nav-link">Home</a></li>
+          <li><a href="../index.html#about"    class="nav-link">About</a></li>
+          <li><a href="../index.html#projects" class="nav-link">Projects</a></li>
+          <li><a href="../index.html#contact"  class="nav-link">Contact</a></li>
+          <li><a href="all.html" class="nav-link active">Lectures</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main style="padding-top: var(--navbar-h);">
+
+    <!-- Hero -->
+    <section class="lec-hero">
+      <div class="container">
+        <span class="section-tag">Knowledge Base</span>
+        <h1 class="section-title" style="margin-top:.5rem">
+          All <span class="gradient-text">Lectures</span>
+        </h1>
+        <p class="lec-hero-sub">Full lecture notes, topics, and resources for every skill in my stack.</p>
+
+        <!-- Search -->
+        <div class="lec-search-wrap">
+          <i class="fas fa-search"></i>
+          <input type="text" id="lectureSearch" class="lec-search" placeholder="Search lectures or skills…" aria-label="Search lectures" />
+        </div>
+      </div>
+    </section>
+
+    <!-- All Skills Grid -->
+    <section class="lec-main section">
+      <div class="container">
+        <div class="lec-filter-row">
+          <button class="lec-filter active" data-filter="all">All</button>
+          <button class="lec-filter" data-filter="HTML">HTML</button>
+          <button class="lec-filter" data-filter="CSS">CSS</button>
+          <button class="lec-filter" data-filter="JavaScript">JavaScript</button>
+          <button class="lec-filter" data-filter="PHP">PHP</button>
+          <button class="lec-filter" data-filter="MySQL">MySQL</button>
+          <button class="lec-filter" data-filter="Flutter">Flutter</button>
+          <button class="lec-filter" data-filter="Firebase">Firebase</button>
+          <button class="lec-filter" data-filter="Supabase">Supabase</button>
+          <button class="lec-filter" data-filter="Git & GitHub">Git</button>
+          <button class="lec-filter" data-filter="Vercel">Vercel</button>
+        </div>
+
+        <div class="lec-grid" id="lecGrid"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <p class="footer-copy">© 2026 Isayas. All Rights Reserved.</p>
+      <a href="../index.html" class="btn btn-outline btn-sm">
+        <i class="fas fa-arrow-left"></i> Back to Portfolio
+      </a>
+    </div>
+  </footer>
+
+  <script src="../js/skills.js" type="module"></script>
+  <script type="module">
+    import { SKILLS_DATA } from '../js/skills-data.js';
+    // Page-specific rendering is handled by lectures.js
+  </script>
+  <script src="../js/lectures.js"></script>
+</body>
+</html>

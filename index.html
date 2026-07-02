@@ -509,6 +509,42 @@
     <i class="fas fa-chevron-up"></i>
   </button>
 
+  <!-- ===== SKILL LECTURE MODAL ===== -->
+  <div class="skill-modal-overlay" id="skillModal" role="dialog" aria-modal="true" aria-labelledby="skillModalTitle" hidden>
+    <div class="skill-modal-card glass-card">
+      <div class="skill-modal-header">
+        <div class="skill-modal-title-row">
+          <span class="skill-modal-icon" id="skillModalIcon"></span>
+          <div>
+            <h2 class="skill-modal-title" id="skillModalTitle"></h2>
+            <span class="skill-modal-level" id="skillModalLevel"></span>
+          </div>
+        </div>
+        <button class="skill-modal-close" id="skillModalClose" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <!-- Tabs -->
+      <div class="skill-modal-tabs" role="tablist">
+        <button class="smt active" data-tab="overview" role="tab" aria-selected="true">Overview</button>
+        <button class="smt" data-tab="lectures" role="tab" aria-selected="false">Lectures</button>
+        <button class="smt" data-tab="resources" role="tab" aria-selected="false">Resources</button>
+      </div>
+
+      <div class="skill-modal-body" id="skillModalBody"></div>
+
+      <div class="skill-modal-footer">
+        <button class="btn btn-outline btn-sm" id="skillModalClose2">
+          <i class="fas fa-times"></i> Close
+        </button>
+        <a href="lectures/all.html" class="btn btn-primary btn-sm" id="viewAllBtn">
+          <i class="fas fa-book-open"></i> View All Lectures
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- SVG Definitions for skill rings -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
@@ -523,5 +559,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/env-config.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/skills.js"></script>
 </body>
 </html>
