@@ -44,6 +44,8 @@ begin
 end;
 $$;
 
+drop trigger if exists trg_projects_updated_at on public.projects;
+
 create trigger trg_projects_updated_at
   before update on public.projects
   for each row execute function public.set_updated_at();
@@ -52,6 +54,11 @@ create trigger trg_projects_updated_at
 
 -- contact_messages: public can INSERT only; only authed admin can SELECT/DELETE
 alter table public.contact_messages enable row level security;
+
+drop policy if exists "Anyone can submit a message"  on public.contact_messages;
+drop policy if exists "Admin can read messages"       on public.contact_messages;
+drop policy if exists "Admin can delete messages"     on public.contact_messages;
+drop policy if exists "Admin can mark messages read"  on public.contact_messages;
 
 create policy "Anyone can submit a message"
   on public.contact_messages for insert
@@ -76,6 +83,9 @@ create policy "Admin can mark messages read"
 
 -- projects: public can SELECT featured; only authed admin can INSERT/UPDATE/DELETE
 alter table public.projects enable row level security;
+
+drop policy if exists "Anyone can view featured projects" on public.projects;
+drop policy if exists "Admin can manage projects"         on public.projects;
 
 create policy "Anyone can view featured projects"
   on public.projects for select
@@ -102,6 +112,10 @@ values (
 on conflict (id) do nothing;
 
 -- Storage policies
+drop policy if exists "Public can view project images"  on storage.objects;
+drop policy if exists "Admin can upload project images" on storage.objects;
+drop policy if exists "Admin can delete project images" on storage.objects;
+
 create policy "Public can view project images"
   on storage.objects for select
   to anon, authenticated
